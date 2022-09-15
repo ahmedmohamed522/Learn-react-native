@@ -1,26 +1,35 @@
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { FlatList, ScrollView, StyleSheet, Text, View } from "react-native";
 
 export default function App() {
     const [people, setPeople] = useState([
-        { name: "ahmed", key: "1" },
-        { name: "mohamed", key: "2" },
-        { name: "mahmoud", key: "3" },
-        { name: "shaun", key: "4" },
-        { name: "luigi", key: "5" },
-        { name: "mario", key: "6" },
-        { name: "bowser", key: "7" },
+        { name: "ahmed", id: "1" },
+        { name: "mohamed", id: "2" },
+        { name: "mahmoud", id: "3" },
+        { name: "shaun", id: "4" },
+        { name: "luigi", id: "5" },
+        { name: "mario", id: "6" },
+        { name: "bowser", id: "7" },
+        { name: "gana", id: "8" },
     ]);
+    const renderHandler = ({ item }) => <Text style={styles.listText}>{item.name}</Text>;
     return (
         <View style={styles.container}>
-            <ScrollView>
+            <FlatList
+                numColumns={2}
+                keyExtractor={(item) => item.id}
+                data={people}
+                renderItem={renderHandler}
+            />
+
+            {/* <ScrollView>
                 {people.map((p) => (
                     <View style={styles.listItem} key={p.key}>
                         <Text style={styles.listText}>name is: {p.name}</Text>
                     </View>
                 ))}
-            </ScrollView>
+            </ScrollView> */}
         </View>
     );
 }
@@ -37,6 +46,7 @@ const styles = StyleSheet.create({
     },
     listText: {
         marginTop: 24,
+        marginHorizontal: 10,
         padding: 30,
         backgroundColor: "pink",
         fontSize: 24,
