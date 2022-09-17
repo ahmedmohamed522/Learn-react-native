@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
         borderBottomColor: "#bbb",
         borderBottomWidth: 1,
         borderStyle: "dashed",
+        marginBottom: 5,
     },
 });
 export default Form;
