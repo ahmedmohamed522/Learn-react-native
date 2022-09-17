@@ -10,7 +10,7 @@ const AddTodo = ({ addItem }) => {
         <View>
             <TextInput
                 style={styles.input}
-                placeholder="new todo..."
+                placeholder={`new todo...`}
                 value={text}
                 onChangeText={changeHandler}
             ></TextInput>

@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
 import { Alert, FlatList, Keyboard, StyleSheet, Text, TouchableWithoutFeedback, View } from "react-native";
 import AddTodo from "./components/AddTodo";
@@ -28,15 +27,9 @@ export default function App() {
                         console.log("Alert closed");
                     },
                 },
-                {
-                    text: "Why",
-                    onPress: () => {
-                        console.log("Whyyy");
-                    },
-                },
             ]);
         setTodos((prevTodos) => {
-            return [...prevTodos, { text, key: Math.random().toString() }];
+            return [{ text, key: Math.random().toString() }, ...prevTodos];
         });
     };
     return (
@@ -69,9 +62,11 @@ const styles = StyleSheet.create({
         backgroundColor: "#fff",
     },
     content: {
+        flex: 1,
         padding: 40,
     },
     list: {
+        flex: 1,
         marginTop: 20,
     },
 });
