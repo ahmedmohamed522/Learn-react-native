@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { Alert, FlatList, Keyboard, StyleSheet, Text, TouchableWithoutFeedback, View } from "react-native";
 import AddTodo from "./components/AddTodo";
 import Header from "./components/Header";
 import TodoItem from "./components/TodoItem";
@@ -19,25 +19,47 @@ export default function App() {
         );
     };
     const addItem = (text) => {
+        console.log(text.length);
+        if (text.length < 3)
+            return Alert.alert("OOPS!", "Todos must be over 3 chars long", [
+                {
+                    text: "Understood",
+                    onPress: () => {
+                        console.log("Alert closed");
+                    },
+                },
+                {
+                    text: "Why",
+                    onPress: () => {
+                        console.log("Whyyy");
+                    },
+                },
+            ]);
         setTodos((prevTodos) => {
             return [...prevTodos, { text, key: Math.random().toString() }];
         });
     };
     return (
-        <View style={styles.container}>
-            <Header />
-            <View style={styles.content}>
-                <AddTodo addItem={addItem} />
-                <View style={styles.list}>
-                    <FlatList
-                        data={todos}
-                        renderItem={({ item }) => {
-                            return <TodoItem item={item} pressHandler={pressHandler} />;
-                        }}
-                    />
+        <TouchableWithoutFeedback
+            onPress={() => {
+                Keyboard.dismiss();
+            }}
+        >
+            <View style={styles.container}>
+                <Header />
+                <View style={styles.content}>
+                    <AddTodo addItem={addItem} />
+                    <View style={styles.list}>
+                        <FlatList
+                            data={todos}
+                            renderItem={({ item }) => {
+                                return <TodoItem item={item} pressHandler={pressHandler} />;
+                            }}
+                        />
+                    </View>
                 </View>
             </View>
-        </View>
+        </TouchableWithoutFeedback>
     );
 }
 
