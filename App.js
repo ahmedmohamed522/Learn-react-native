@@ -1,4 +1,5 @@
-import Home from "./screens/Home";
+import "react-native-gesture-handler";
+import Navigator from "./routes/homeStack";
 import { useFonts } from "expo-font";
 
 export default function App() {
@@ -10,5 +11,5 @@ export default function App() {
     if (!loaded) {
         return null;
     }
-    return <Home />;
+    return <Navigator />;
 }
